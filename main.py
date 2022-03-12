@@ -5,6 +5,7 @@ from pystyle import Colorate, Colors, Center
 
 boucle1 = True
 boucle2 = True
+boucle3 = True
 
 header_final = """
        \  |               _)  |            | 
@@ -12,7 +13,28 @@ header_final = """
       |   |  (   |  (   |  |    <   (   |  | 
      _|  _| \__,_| \__, | _| _|\_\ \__,_| _| 
                    |___/                     
-  V 1.0 - Gab_#8440 - discord.gg/BtNrFc45B7\n\n\n\n"""
+  V 1.1 - Gab_#8440 - discord.gg/BtNrFc45B7\n\n\n\n"""
+
+while boucle3:
+    system('cls')
+    print(Colorate.Diagonal(Colors.purple_to_blue, Center.XCenter(header_final)))
+    print(Colorate.Horizontal(Colors.purple_to_blue, "[?] Token ↓"))
+    token = input("")
+
+    headers = {
+        'Authorization': token
+    }
+    src = requests.get('https://discordapp.com/api/v6/auth/login', headers=headers)
+    try:
+        if src.status_code == 200:
+            print(Colorate.Horizontal(Colors.purple_to_blue, 'Token Works!'))
+            sleep(2)
+            boucle3 = False
+        else:
+            print(Colorate.Horizontal(Colors.yellow_to_red, '[!] Invalid Token.'))
+            sleep(5)
+    except:
+        print(Colorate.Horizontal(Colors.yellow_to_red, "[!] Please insert a valid token !"))
 
 while boucle1:
     system('cls')
@@ -39,7 +61,7 @@ headers = {
         'Authorization' : token
     }
 
-while boucle2:
+while boucle2:          
     requests.post(
             f"https://discord.com/api/channels/{channel_id}/messages",
             headers = headers,
